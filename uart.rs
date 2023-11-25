@@ -1,5 +1,5 @@
 pub struct UART{
-    
+
 }
 
 
@@ -8,6 +8,6 @@ impl UART {
 
 
 
-
+        Self {  }
     }
 }

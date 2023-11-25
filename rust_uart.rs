@@ -1,37 +1,38 @@
 // SPDX-License-Identifier: GPL-2.0
 
 //! Rust out-of-tree sample
-
+#![allow(unused)]
 use kernel::prelude::*;
-mod uart;
+
+use crate::uart::UART;
+pub mod uart;
+
 
 
 module! {
-    type: RustOutOfTree,
-    name: "rust_uart",
+    type: RustUart,
+    name: "Rust_UART",
     author: "Rust for Linux Contributors",
     description: "Rust out-of-tree sample",
     license: "GPL",
 }
 
-struct RustOutOfTree {
-    numbers: Vec<i32>,
+struct RustUart {
+    uart: UART
 }
 
-impl kernel::Module for RustOutOfTree {
+impl kernel::Module for RustUart {
     fn init(_module: &'static ThisModule) -> Result<Self> {
-        pr_info!("Rust out-of-tree sample (init)\n");
+        pr_info!("Rust UART (init)\n");
 
-        let mut numbers = Vec::new();
-        numbers.try_push(72)?;
-        numbers.try_push(108)?;
-        numbers.try_push(200)?;
+        let uart = UART::new();
+        
 
-        Ok(RustOutOfTree { numbers })
+        Ok(RustUart { uart })
     }
 }
 
-impl Drop for RustOutOfTree {
+impl Drop for RustUart {
     fn drop(&mut self) {
         pr_info!("My numbers are {:?}\n", self.numbers);
         pr_info!("Rust out-of-tree sample (exit)\n");

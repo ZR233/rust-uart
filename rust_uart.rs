@@ -3,10 +3,12 @@
 //! Rust out-of-tree sample
 
 use kernel::prelude::*;
+mod uart;
+
 
 module! {
     type: RustOutOfTree,
-    name: "rust_out_of_tree",
+    name: "rust_uart",
     author: "Rust for Linux Contributors",
     description: "Rust out-of-tree sample",
     license: "GPL",

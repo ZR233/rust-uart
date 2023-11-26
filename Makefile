@@ -31,7 +31,6 @@ rootfs: default
 	sudo cp rust_uart.ko mnt
 	sudo umount mnt
 
-
 run: rootfs
 	qemu-system-riscv64 \
  		-m 2G \
@@ -42,3 +41,4 @@ run: rootfs
     	-drive file=$(fs_name),format=raw,id=hd0 \
     	-device virtio-blk-device,drive=hd0 \
 		-serial stdio
+
